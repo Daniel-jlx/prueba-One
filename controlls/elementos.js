@@ -7,7 +7,7 @@ const Elemento = require('../models/elemento');
 
 const mostrarElementos = async(req = request, res = response) => {
 
-    const query = { disponibilidadUno: true };
+    const query = { disponibilidad: true };
     const [elementos, total] = await Promise.all([
         Elemento.find(query),
         Elemento.countDocuments(query)
@@ -21,11 +21,11 @@ const mostrarElementos = async(req = request, res = response) => {
 
 const mostrarElementosID = async(req = request, res = response) => {
 
-    
 
-    const id = req.params.id;
-    const elemento = await Elemento.findById(id)
-    
+
+    const id_edificio = req.params.id_edificio;
+    const elemento = await Elemento.find({ id_edificio })
+
 
     res.json({ elemento });
 };
@@ -40,8 +40,8 @@ const elementosPost = async(req = request, res = response) => {
         })
     };
 
-    const { elementoUno,  precioUno, descripcionUno, disponibilidadUno, elementoDos, precioDos, descripcionDos, disponibilidadDos } = req.body;
-    const elemento = new Elemento({ elementoUno,  precioUno, descripcionUno, disponibilidadUno, elementoDos, precioDos, descripcionDos, disponibilidadDos });
+    const { id_edificio, nombre, precio, descripcion, disponibilidad } = req.body;
+    const elemento = new Elemento({ id_edificio, nombre, precio, descripcion, disponibilidad });
 
     await elemento.save();
     res.json({ elemento });
@@ -49,11 +49,12 @@ const elementosPost = async(req = request, res = response) => {
 
 const elementosCompra = async(req = request, res = response) => {
 
+    const usuario = req.usu
     const id = req.params.id;
     const elemento = await Elemento.findById(id)
-    const { disponibilidadUno = elemento.disponibilidadUno, disponibilidadDos = elemento.disponibilidadDos } = req.body;
+    const { disponibilidad = elemento.disponibilidad } = req.body;
 
-    const elementoUpdate = await Elemento.findByIdAndUpdate(id, { disponibilidadUno, disponibilidadDos });
+    const elementoUpdate = await Elemento.findByIdAndUpdate(id, { disponibilidad, usuario });
 
     res.json({ elementoUpdate });
 };

@@ -1,5 +1,4 @@
 const Edificio = require('../models/edificio');
-const Elemento = require('../models/elemento');
 const Usuario = require('../models/usuario');
 const roles = ['administrador', 'cliente'];
 const estados = ['true', 'false'];
@@ -65,14 +64,6 @@ const existeIdE = async(id) => {
     return true;
 };
 
-const existeIdElement = async(id = '') => {
-    const elemento = await Elemento.findById(id);
-
-    if (!elemento) {
-        throw new Error('Estos elementos no existen');
-    }
-    return true;
-};
 
 
 
@@ -87,7 +78,6 @@ module.exports = {
     nombreRepetido,
     existeIdE,
     elegirEstado,
-    existeIdElement,
     elegirDisponibilidad
 
 }

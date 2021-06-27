@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { errorRutas } = require('../middlewares/error-usuario');
+const { errorRutas } = require('../middlewares/error-rutas');
 const { loginPost } = require('../controlls/login');
 const router = Router();
 

@@ -1,35 +1,27 @@
 const { Schema, model } = require('mongoose');
 
 const ElementoSchema = Schema({
-    elementoUno: {
+    usuario: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario'
+    },
+    id_edificio: {
+        type: String,
+        required: [true, 'El id del edificio es obligatorio']
+    },
+    nombre: {
         type: String,
         required: [true, 'El nombre del elemento es obligatorio']
     },
-    precioUno: {
+    precio: {
         type: Number,
         required: [true, 'El precio es obligatoria']
     },
-    descripcionUno: {
+    descripcion: {
         type: String,
         required: [true, 'La descripcion es obligatoria'],
     },
-    disponibilidadUno: {
-        type: Boolean,
-        default: true,
-    },
-    elementoDos: {
-        type: String,
-        required: [true, 'El nombre del elemento es obligatorio']
-    },
-    precioDos: {
-        type: Number,
-        required: [true, 'El precio es obligatoria']
-    },
-    descripcionDos: {
-        type: String,
-        required: [true, 'La descripcion es obligatoria'],
-    },
-    disponibilidadDos: {
+    disponibilidad: {
         type: Boolean,
         default: true,
     },
