@@ -40,14 +40,23 @@ const elementosPost = async(req = request, res = response) => {
         })
     };
 
-    const { id_edificio, nombre, precio, descripcion, disponibilidad } = req.body;
-    const elemento = new Elemento({ id_edificio, nombre, precio, descripcion, disponibilidad });
+    const { id_edificio, nombre, precio, descripcion } = req.body;
+    const elemento = new Elemento({ id_edificio, nombre, precio, descripcion });
 
     await elemento.save();
     res.json({ elemento });
 };
 
 const elementosCompra = async(req = request, res = response) => {
+
+
+    const role = req.usu
+
+    if (role.rol != "cliente") {
+        return res.status(400).json({
+            msg: 'No tiene acceso a estas opciones'
+        })
+    };
 
     const usuario = req.usu
     const id = req.params.id;

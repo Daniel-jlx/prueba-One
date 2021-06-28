@@ -1,14 +1,14 @@
 const { response, request } = require('express');
 
 
-const Usuario = require('../models/usuario');
+// const Usuario = require('../models/usuario');
 const Edificio = require('../models/edificio');
 
 
 
 const mostrarEdificios = async(req = request, res = response) => {
 
-    const query = { estado: true || false };
+    const query = { estado: true };
     const [edificios, total] = await Promise.all([
         Edificio.find(query),
         Edificio.countDocuments(query)
@@ -22,11 +22,11 @@ const mostrarEdificios = async(req = request, res = response) => {
 
 const mostrarEdificiosID = async(req = request, res = response) => {
 
-    
+
 
     const id = req.params.id;
     const edificio = await Edificio.findById(id)
-    
+
 
     res.json({ edificio });
 };

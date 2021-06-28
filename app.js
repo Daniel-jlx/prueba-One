@@ -6,5 +6,5 @@ const server = new Server();
 
 
 
-server.middlewares();
+// server.middlewares();
 server.listen();

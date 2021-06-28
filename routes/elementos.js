@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { elementosPost, mostrarElementos, mostrarElementosID, elementosCompra } = require('../controlls/elementos');
-const { elegirDisponibilidad } = require('../helpers/elegir-rol');
+const { elegirDisponibilidad, existeIdElement } = require('../helpers/elegir-rol');
 const { errorRutas } = require('../middlewares/error-rutas');
 const { validarToken } = require('../middlewares/validar-token');
 
@@ -22,6 +22,7 @@ router.post('/', [
 
 router.put('/:id', [
     validarToken,
+    check('id').custom(existeIdElement),
     check('disponibilidad', 'La disponibilidad es requerida').not().isEmpty(),
     check('disponibilidad').custom(elegirDisponibilidad),
     errorRutas,
